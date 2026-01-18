@@ -3,6 +3,8 @@
 
 ```text
 Sprint_7/
+│── allure-results/                             # Отчёты Allure
+│
 ├── api_methods/
 │   └── api_methods.py                          # Методы взаимодействия с api
 │
