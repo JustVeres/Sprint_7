@@ -29,21 +29,24 @@ class TestCreatingCourier:
             _, _ = courier_api.create_courier()
 
         with allure.step("Отправляем второй запрос на создание курьера"):
-            status_2, _ = courier_api.create_courier()
+            status_2, text_2 = courier_api.create_courier()
 
         with allure.step("Проверяем код ответа"):
             assert status_2 == 409
 
+        with allure.step("Проверяем тело ответа"):
+            assert text_2['message'] == RT.two_identical_couriers
 
 
     @allure.title("Курьера можно создать с обязательными полями login и password")
     @allure.description("Курьер создается с login и password")
     def test_create_courier_with_required_fields(self, courier_api):
         with allure.step("Отправляем запрос на создание курьера с логином и паролем"):
-            status, _ = courier_api.create_courier_with_required_fields()
+            status, text = courier_api.create_courier_with_required_fields()
         with allure.step("Проверяем код ответа"):
             assert status == 201
-
+        with allure.step("Проверяем тело ответа"):
+            assert text == RT.creating_courier
 
 
     @allure.title("Курьера невозможно создать без обязательных полей")
